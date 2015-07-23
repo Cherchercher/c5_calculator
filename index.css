@@ -1,0 +1,10 @@
+#result {
+    width: 100%;
+}
+#operator_bay {
+    margin: 20px;
+}
+#result[readonly]
+{
+    background-color:blue;
+}
