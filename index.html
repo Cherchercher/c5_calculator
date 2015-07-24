@@ -5,51 +5,23 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="script.js">
 
-        $(document).ready(function(){
-    var testNumLength = function(number) {
-        if (number.length > 9) {
-            totaldiv.text(number.substr(number.length-9,9));
-            if (number.length > 15) {
-                number = "";
-                totaldiv.text("Err");
-            }
-        } 
-    };/*This function called testNumLength targeting the length of number is used to check if the number is out of scope;
+       /*This function called testNumLength targeting the length of number is used to check if the number is out of scope;
         */
     var number = "";
     var newnumber = "";
     var operator = "";
     var totaldiv = $("#total");
     totaldiv.text("0");
-    $("#numbers a").not("#clear,#clearall").click(function(){
-        number += $(this).text();
-        totaldiv.text(number);
-        testNumLength(number);
-    });  /*This click function targeting all <a> elements with  ID="number" except the ones with ID="clear", "clearall" is used to display "text = clicked numbers" in our totaldiv;called fuction testNumLength will check if the output is out of scope*/
-    $("#operators a").not("#equals").click(function(){
-        operator = $(this).text();
-        newnumber = number;
-        number = "";
-        totaldiv.text("0");
-    }); /*This click function targeting all <a> elements with  ID="number" except the ones with ID="equal" is used to display "text = 0" in our totaldiv while storing the value of number to a variable called newnumber, and then clear the value of number to get it ready for new value.*/
-    $("#clear,#clearall").click(function(){
-        number = "";
-        totaldiv.text("0");
-        if ($(this).attr("id") === "clearall") {
-            newnumber = "";
-        }
-    });/*This click function targeting all elements with  ID="clear","clearall" is used to clear the value of number to get it ready for new number and display "text = 0" in our totaldiv. Besides that, clicked elements with id="clearall" will be targeted and the value of newnumber will be cleared upon execution.*/
+     /*This click function targeting all <a> elements with  ID="number" except the ones with ID="clear", "clearall" is used to display "text = clicked numbers" in our totaldiv;called fuction testNumLength will check if the output is out of scope*/
+
+     /*This click function targeting all <a> elements with  ID="number" except the ones with ID="equal" is used to display "text = 0" in our totaldiv while storing the value of number to a variable called newnumber, and then clear the value of number to get it ready for new value.*/
+    
+    /*This click function targeting all elements with  ID="clear","clearall" is used to clear the value of number to get it ready for new number and display "text = 0" in our totaldiv. Besides that, clicked elements with id="clearall" will be targeted and the value of newnumber will be cleared upon execution.*/
    //DWP THIS ONE
-    $("#equals").click(function(){
-        if (operator === "+"){
-            number = (parseInt(number, 10) + parseInt(newnumber,10)).toString(10);
-        }    /*decide if the div with id="operator" is equal to "+",if it is ,turn the string named "number" into integer " and then process addition. */else if (operator === "-"){
-            number = (parseInt(newnumber, 10) - parseInt(number,10)).toString(10);
-        } /*decide if the div with id="operator" is equal to "-",if it is ,turn the string named "number" into integer " and then process subtraction. */else if (operator === "÷"){
-            number = (parseInt(newnumber, 10) / parseInt(number,10)).toString(10);
-        }/*decide if the div with id="operator" is equal to "&divide;",if it is ,turn the string named "number" into integer " and then process addition. */ else if (operator === "×"){
-            number = (parseInt(newnumber, 10) * parseInt(number,10)).toString(10);
-        } /*decide if the div with id="operator" is equal to "&times;",if it is ,turn the string named "number" into integer " and then process multiplication. */
+      /*decide if the div with id="operator" is equal to "+",if it is ,turn the string named "number" into integer " and then process addition. */ 
+      /*decide if the div with id="operator" is equal to "-",if it is ,turn the string named "number" into integer " and then process subtraction. */ 
+       /*decide if the div with id="operator" is equal to "&divide;",if it is ,turn the string named "number" into integer " and then process addition. */  
+       /*decide if the div with id="operator" is equal to "&times;",if it is ,turn the string named "number" into integer " and then process multiplication. */
         totaldiv.text(number);
         testNumLength(number);
         number = "";
