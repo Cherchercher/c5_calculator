@@ -39,17 +39,17 @@
             newnumber = "";
         }
     });/*This click function targeting all elements with  ID="clear","clearall" is used to clear the value of number to get it ready for new number and display "text = 0" in our totaldiv. Besides that, clicked elements with id="clearall" will be targeted and the value of newnumber will be cleared upon execution.*/
-   
+   //DWP THIS ONE
     $("#equals").click(function(){
         if (operator === "+"){
             number = (parseInt(number, 10) + parseInt(newnumber,10)).toString(10);
-        } else if (operator === "-"){
+        }    /*decide if the div with id="operator" is equal to "+",if it is ,turn the string named "number" into integer " and then process addition. */else if (operator === "-"){
             number = (parseInt(newnumber, 10) - parseInt(number,10)).toString(10);
-        } else if (operator === "÷"){
+        } /*decide if the div with id="operator" is equal to "-",if it is ,turn the string named "number" into integer " and then process subtraction. */else if (operator === "÷"){
             number = (parseInt(newnumber, 10) / parseInt(number,10)).toString(10);
-        } else if (operator === "×"){
+        }/*decide if the div with id="operator" is equal to "&divide;",if it is ,turn the string named "number" into integer " and then process addition. */ else if (operator === "×"){
             number = (parseInt(newnumber, 10) * parseInt(number,10)).toString(10);
-        }
+        } /*decide if the div with id="operator" is equal to "&times;",if it is ,turn the string named "number" into integer " and then process multiplication. */
         totaldiv.text(number);
         testNumLength(number);
         number = "";
