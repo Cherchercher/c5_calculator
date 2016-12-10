@@ -1,167 +1,134 @@
+<!DOCTYPE html>
 <html>
-<head>
-   <title>Concentration Game</title>
-   <link href="memory.css" rel="stylesheet" type="text/css">
-   
-<script src="
-https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
-<script>
-var operand1 ;
-    var operand2; 
+    <head>
+        <title>Calculator</title>
+        <link rel="stylesheet" href="index.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+       
+        <script>
+        $(document).ready(function(){
+    var testNumLength = function(number) {
+        if (number.length > 9) {
+            totaldiv.text(number.substr(0,9));
+        } 
+    };
+    var number = "";
+    var newnumber = "";
+    var operator = "";
+    var totaldiv = $("#total");
+    totaldiv.text("0");
+    $("#numbers a").not("#clear,#clearall").click(function(){
+        number += $(this).text();
+        totaldiv.text(number);
+        testNumLength(number);
+    });
 
-function display_operator(op) {
-    console.log("displayoperator_run", op);
-    operator=op;
-    var A = $('#inputdisplay').val();
-    var B = A + op;
-    $('#inputdisplay').val(B);
-    number_index=1;
+    $("#operators a").not("#equals").click(function(){
+        operator = $(this).text();
+        newnumber = number;
+        number = "";
+        totaldiv.text("0");
+    });
+
+    $("#side a").not("#equals, #decimal").click(function(){
+        side = $(this).text();
+        newnumber = number;
+        number = "";
+        totaldiv.text("0");
+    });
+
+    $ ("#decimal").click(function(){
+        operator = $(this).text();
+        newnumber = number;
+        number = "";
+        totaldiv.text("0");
+        {
+            number = newnumber*0.1+ number;
+        }
+        
+        totaldiv.text(number);
+        testNumLength(number);
+        number = "";
+        newnumber = "";
+    });
     
-};
+    $("#clear,#clearall").click(function(){
+        number = "";
+        totaldiv.text("0");
+        if ($(this).attr("id") === "clearall") {
+            newnumber = "";
+        }
+    });
 
-    var operand_array = ['', ''];
-    var number_index = 0;
-    var operator='';
-function input_digit(digit) {
+    $("#equals").click(function(){
+        if (operator === "+")
+        {
+            number = (parseInt(number, 10) + parseInt(newnumber,10)).toString(10);
+        } 
+        else if (operator === "-")
+        {
+            number = (parseInt(newnumber, 10) - parseInt(number,10)).toString(10);
+        } 
+        else if (operator === "÷")
+        {
+            number = (parseInt(newnumber, 10) / parseInt(number,10)).toString(10);
+        } 
+        else if (operator === "×")
+        {
+            number = (parseInt(newnumber, 10) * parseInt(number,10)).toString(10);
+        }
+        else if (side === "^")
+        {    
+            number = (Math.pow(newnumber, number)).toString(10);
+        } 
+        else if (side === "√")
+        {    
+            number = (Math.sqrt(newnumber, number)).toString(10);
+        }
 
-    var C = $('#inputdisplay').val();
-    var D = C + digit;
-    $('#inputdisplay').val(D);
-    operand_array[number_index] = operand_array[number_index]+=digit;
-/*
-
-   for (var number_index = 0; number_index < operand_array.length; number_index++) {
-        operand_array[number_index] = operand_array[number_index].concat(result2);
-    } */
-
-}
-
-
-$("#add_button").click(function () {
-     display_operator('+');
-     console.log('add numbers called');
-
-    
+        totaldiv.text(number);
+        testNumLength(number);
+        number = "";
+        newnumber = "";
+    });
 });
-     var operator='';
-function add_numbers(operand1, operand2) {
-
-    var result = parseInt(operand1) + parseInt(operand2);
-    return result;
-}
-$("#sub_button").click(function () {
-     display_operator('-');
-      console.log('sub numbers called');
-    var result = parseInt(operand1) - parseInt(operand2);
-    
-});
-
-function sub_numbers(operand1, operand2) {
-    console.log('sub numbers called');
-    var result = parseInt(operand1) - parseInt(operand2);
-   return result;
-}
-
-$("#mul_button").click(function () {
-     display_operator('*');
-    var number0_val= $("#number1_0").val();
-    var number1_val = $("#number_1").val();
-    mul_numbers(number0_val, number1_val);
-});
-
-
-
-
-function mul_numbers(operand1, operand2) {
-    console.log('mul numbers called');
-    var result = parseInt(operand1) * parseInt(operand2);
-   return result;
-}
-
-$("#div_button").click(function () {
-     display_operator('/');
-    var number0_val = $("#number_0").val();
-    var number1_val = $("#number_1").val();
-    div_numbers(number0_val, number1_val);
-});
-
-
-
-function div_numbers(operand1, operand2) {
-    console.log('division numbers called');
-    var result = parseInt(operand1) / parseInt(operand2);
-    return result;
-}
-
-$("#equal").click(function () {
-
-    equation()
-});
-
-function equation() {
-    console.log(operand_array);
-    var operand1 = operand_array[0];
-    var operand2 = operand_array[1];
-
-    switch (operator) {
-        case '+':
-
-
-            var result = add_numbers(operand1, operand2);
-
-
-
-
-            break;
-        case '*':
-             var result = mul_numbers(operand1, operand2);
-
-
-            break;
-        case '-':
-              var result = sub_numbers(operand1, operand2);
-            break;
-        case '/':
-            var result = div_numbers(operand1, operand2);
-
-            break;
-
-
-    }
-    $("#result").val(result);
-
-
-};
-
-
-
-</script>
-</head>
-<body>
-	<span id="operator"></span>
-
-<button onclick="equation" id="equal" "calculate" type="button">=</button>
-<input id="result" placeholder="Result" type="text" readonly="readonly">
-<input id="inputdisplay" placeholder="Ready" type="text">
-<br>
-<div class="operator_bay">
-    <button id="add_button" "calculate" type="button">+</button>
-    <button id="sub_button" "calculate" type="button">-</button>
-    <button id="mul_button" "calculate" type="button">*</button>
-    <button id="div_button" "calculate" type="button">/</button>
-</div>
-<button type="button" onclick="input_digit(1)">1</button>
-<button type="button" onclick="input_digit(2)">2</button>
-<button type="button" onclick="input_digit(3)">3</button>
-<br>
-<button type="button" onclick="input_digit(4)">4</button>
-<button type="button" onclick="input_digit(5)">5</button>
-<button type="button" onclick="input_digit(6)">6</button>
-<br>
-<button type="button" onclick="input_digit(7)">7</button>
-<button type="button" onclick="input_digit(8)">8</button>
-<button type="button" onclick="input_digit(9)">9</button>
-<br>
-<button type="button" onclick="input_digit(0)">0</button>
-	</body>
-		</html>
+        </script>
+    </head>
+    <body>
+        <div id="calculator">
+            <div id="total">
+            </div>
+            <div id="operators">
+                <a>+</a>
+                <a>-</a>
+                <a>&divide;</a>
+                <a>&times;</a>
+            </div>
+            <div id="side">
+                <a id="sq">^</a>
+                <a id="sqrt">√</a>
+                <a id="decimal">.</a>
+                <a id="equals">=</a>
+            </div>
+            <div id="numbers">
+                <a>1</a>
+                <a>2</a>
+                <a>3</a>
+                <a>4</a>
+                <a>5</a>
+                <a>6</a>
+                <a>7</a>
+                <a>8</a>
+                <a>9</a>
+                <a id="clear">C</a>
+                <a>0</a>
+                <a id="clearall">AC</a>
+            </div>
+        </div>
+         <div id="themes">
+            <a id="sky"></a>
+            <a id="forest"></a>
+            <a id="ocean"></a>
+    </div>
+    </body
+</html>
